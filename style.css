@@ -65,7 +65,7 @@ section {
   overflow-x: auto;
   padding: 2rem calc((100vw - 4 * 280px - 3 * 2rem) / 2); /* Center 4 cards with gap */
   justify-content: flex-start;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory; /* Enable horizontal scroll snap */
   -webkit-overflow-scrolling: touch;
   background: #f5f7fa;
   box-sizing: border-box;
@@ -85,6 +85,7 @@ section > div {
   transition: transform 0.2s, box-shadow 0.2s, padding-bottom 0.3s;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: center; /* Snap each card to the center on big screens */
 }
 
 section > div img {
