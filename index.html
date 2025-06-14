@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intel: Sustainability Through the Ages</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -81,7 +84,7 @@
     <div>
       <h2>2006</h2>
       <h3>Peak GHG Emissions</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/5.jpg" alt="Placeholder Image" />
       <p>
         This year marks Intel's highest annual greenhouse gas emissions 
         for operations. Over subsequent years, Intel invests heavily in 
@@ -94,7 +97,7 @@
     <div>
       <h2>2020</h2>
       <h3>RISE Strategy</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/6.jpg" alt="Placeholder Image" />
       <p>
         Intel launches its RISE (Responsible, Inclusive, Sustainable, 
         Enabling) strategy and 2030 goals, aiming to drive industry-wide 
@@ -106,7 +109,7 @@
     <div>
       <h2>2022</h2>
       <h3>Net-Zero By 2040</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/7.jpg" alt="Placeholder Image" />
       <p>
         Intel announces its commitment to achieve net-zero greenhouse 
         gas emissions (Scope 1 and 2) across its global operations 
@@ -118,7 +121,7 @@
     <div>
       <h2>2023</h2>
       <h3>Renewable Electricity</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/8.jpg" alt="Placeholder Image" />
       <p>
         The company achieves 99% renewable electricity usage worldwide, 
         helping to drastically lower carbon emissions and driving progress 
@@ -130,7 +133,7 @@
     <div>
       <h2>2024</h2>
       <h3>Sustainability Summit</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/9.jpg" alt="Placeholder Image" />
       <p>
         Intel hosts its first Sustainability Summit, uniting suppliers, 
         government officials, and industry leaders to collaborate on 
@@ -139,5 +142,47 @@
     </div>
   </section>
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <script>
+    // Auto-activate one card at a time on small screens as user scrolls
+    function isSmallScreen() {
+      return window.matchMedia('(max-width: 600px)').matches;
+    }
+
+    const timeline = document.querySelector('section');
+    const cards = Array.from(timeline.querySelectorAll('div'));
+
+    // Remove .active from all cards
+    function clearActive() {
+      cards.forEach(card => card.classList.remove('active'));
+    }
+
+    // Set .active on the card most in view
+    function setActiveCardOnScroll() {
+      if (!isSmallScreen()) {
+        clearActive();
+        return;
+      }
+      let bestCard = null;
+      let bestVisible = 0;
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const visible = Math.max(0, Math.min(window.innerHeight, rect.bottom) - Math.max(0, rect.top));
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          bestCard = card;
+        }
+      });
+      clearActive();
+      if (bestCard) bestCard.classList.add('active');
+    }
+
+    // Listen for scroll and resize
+    window.addEventListener('scroll', setActiveCardOnScroll, { passive: true });
+    window.addEventListener('resize', setActiveCardOnScroll);
+
+    // Initial activation
+    setActiveCardOnScroll();
+  </script>
 </body>
 </html>
